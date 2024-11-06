@@ -13,7 +13,7 @@ import { DeleteConfirmation } from "@/components/shared/delete-confirmation";
 
 
 const ImageDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+  const { id }: { id: string } = params; // Explicitly type `id` here
   const { userId } = auth();
   const image = await getImageById(id);
 
