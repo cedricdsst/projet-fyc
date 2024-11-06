@@ -9,11 +9,15 @@ import { getImageById } from "@/lib/actions/image.actions";
 import { getImageSize } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/shared/delete-confirmation";
 
+// Define the props type for ImageDetails
+interface ImageDetailsProps {
+  params: {
+    id: string;
+  };
+}
 
-
-
-const ImageDetails = async ({ params }: { params: { id: string } }) => {
-  const { id }: { id: string } = params; // Explicitly type `id` here
+const ImageDetails = async ({ params }: ImageDetailsProps) => {
+  const { id } = params;
   const { userId } = auth();
   const image = await getImageById(id);
 
@@ -22,7 +26,6 @@ const ImageDetails = async ({ params }: { params: { id: string } }) => {
       <Header title={image.title} />
 
       <section className="mt-5 flex flex-wrap gap-4">
-        {/* Display the author’s username */}
         <div className="p-14-medium md:p-16-medium flex gap-2">
           <p className="text-dark-600">Author:</p>
           <p className="capitalize text-purple-400">{image.author.username}</p>
@@ -61,7 +64,6 @@ const ImageDetails = async ({ params }: { params: { id: string } }) => {
 
       <section className="mt-10 border-t border-dark-400/15">
         <div className="transformation-grid">
-          {/* Original Image */}
           <div className="flex flex-col gap-4">
             <h3 className="h3-bold text-dark-600">Original</h3>
             <Image
@@ -73,7 +75,6 @@ const ImageDetails = async ({ params }: { params: { id: string } }) => {
             />
           </div>
 
-          {/* Transformed Image */}
           <TransformedImage
             image={image}
             type={image.transformationType}
@@ -98,4 +99,3 @@ const ImageDetails = async ({ params }: { params: { id: string } }) => {
 };
 
 export default ImageDetails;
-
