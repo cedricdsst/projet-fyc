@@ -10,14 +10,9 @@ import { getImageSize } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/shared/delete-confirmation";
 
 
-interface SearchParamProps {
-  params: {
-    id: string;
-  };
-}
 
 
-const ImageDetails = async ({ params }: SearchParamProps) => {
+const ImageDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const { userId } = auth();
   const image = await getImageById(id);
@@ -103,3 +98,4 @@ const ImageDetails = async ({ params }: SearchParamProps) => {
 };
 
 export default ImageDetails;
+
