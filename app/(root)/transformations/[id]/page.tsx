@@ -17,7 +17,8 @@ interface SearchParamProps {
 }
 
 
-const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
+const ImageDetails = async ({ params }: SearchParamProps) => {
+  const { id } = params;
   const { userId } = auth();
   const image = await getImageById(id);
 
