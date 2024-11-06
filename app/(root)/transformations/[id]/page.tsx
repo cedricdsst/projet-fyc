@@ -9,7 +9,15 @@ import { getImageById } from "@/lib/actions/image.actions";
 import { getImageSize } from "@/lib/utils";
 import { DeleteConfirmation } from "@/components/shared/delete-confirmation";
 
-const ImageDetails = async ({ params: { id } }) => {
+
+interface SearchParamProps {
+  params: {
+    id: string;
+  };
+}
+
+
+const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = auth();
   const image = await getImageById(id);
 
@@ -18,8 +26,6 @@ const ImageDetails = async ({ params: { id } }) => {
       <Header title={image.title} />
 
       <section className="mt-5 flex flex-wrap gap-4">
-
-
         {/* Display the author’s username */}
         <div className="p-14-medium md:p-16-medium flex gap-2">
           <p className="text-dark-600">Author:</p>
