@@ -6,7 +6,13 @@ import { connectToDatabase } from "../database/mongoose";
 import Transaction from "../database/models/transaction.model";
 import { updateCredits } from "./user.actions";
 
-export async function checkoutCredits(transaction) {
+interface Transaction {
+  buyerId: string;
+  credits: number;
+  [key: string]: any;
+}
+
+export async function checkoutCredits(transaction: Transaction): Promise<void> {
   // Connect to the database
   await connectToDatabase();
 
@@ -23,7 +29,17 @@ export async function checkoutCredits(transaction) {
   redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/profile`);
 }
 
-export async function createTransaction(transaction) {
+interface CreateTransactionInput {
+  buyerId: string;
+  credits: number;
+  [key: string]: any;
+}
+
+interface NewTransaction {
+  [key: string]: any;
+}
+
+export async function createTransaction(transaction: CreateTransactionInput): Promise<NewTransaction | void> {
   try {
     await connectToDatabase();
 
